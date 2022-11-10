@@ -4,9 +4,11 @@ import { ReplaySubject } from 'rxjs';
 import { map } from "rxjs/operators";
 import { User } from '../_models/users';
 
+
 @Injectable({
   providedIn: 'root'
 })
+
 export class AccountService {
   baseUrl = "https://localhost:5001/api/"
   private currentUserSource = new ReplaySubject<User>(1);
