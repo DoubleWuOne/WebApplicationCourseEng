@@ -18,6 +18,7 @@ using Microsoft.IdentityModel.Tokens;
 using WebApplicationCourseEng.Data;
 using WebApplicationCourseEng.Extensions;
 using WebApplicationCourseEng.Interfaces;
+using WebApplicationCourseEng.Middleware;
 using WebApplicationCourseEng.Services;
 
 namespace WebApplicationCourseEng
@@ -46,13 +47,15 @@ namespace WebApplicationCourseEng
 
         public void Configure(IApplicationBuilder app, IWebHostEnvironment env)
         {
+            app.UseMiddleware<ExceptionMiddleware>();
+            /*
             if (env.IsDevelopment())
             {
                 app.UseDeveloperExceptionPage();
              //   app.UseSwagger();
              //   app.UseSwaggerUI(c => c.SwaggerEndpoint("/swagger/v1/swagger.json", "WebApplicationCourseEng v1"));
             }
-
+            */
             app.UseHttpsRedirection();
 
             app.UseRouting();
