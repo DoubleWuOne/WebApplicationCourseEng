@@ -24,12 +24,12 @@ namespace WebApplicationCourseEng.Controllers
         [HttpPost("register")]
         public async Task<ActionResult<UserDto>> Register(RegisterDto registerDto)
         {
-            if (await UserExist(registerDto.UserName)) return BadRequest("Username is taken");
+            if (await UserExist(registerDto.Username)) return BadRequest("Username is taken");
 
             using var hmac = new HMACSHA512();
             var user = new AppUser
             {
-                UserName = registerDto.UserName.ToLower(),
+                UserName = registerDto.Username.ToLower(),
                 PasswordHash = hmac.ComputeHash(Encoding.UTF8.GetBytes((registerDto.Password))),
                 PasswordSalt = hmac.Key
             };
@@ -37,7 +37,7 @@ namespace WebApplicationCourseEng.Controllers
             await _context.SaveChangesAsync();
             return new UserDto
             {
-                UserName = user.UserName,
+                Username = user.UserName,
                 Token = _tokenService.CreateToken(user)
             };
         }
@@ -46,7 +46,7 @@ namespace WebApplicationCourseEng.Controllers
         public async Task<ActionResult<UserDto>> Login(LoginDto loginDto)
         {
             var user = await _context.Users.SingleOrDefaultAsync(
-                x => x.UserName == loginDto.UserName);
+                x => x.UserName == loginDto.Username);
             if (user == null) return Unauthorized("Invalid Username");
 
             using var hmac = new HMACSHA512(user.PasswordSalt);
@@ -59,7 +59,7 @@ namespace WebApplicationCourseEng.Controllers
 
             return new UserDto
             {
-                UserName = user.UserName,
+                Username = user.UserName,
                 Token = _tokenService.CreateToken(user)
             };
         }
