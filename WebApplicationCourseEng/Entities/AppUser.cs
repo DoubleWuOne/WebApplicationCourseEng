@@ -25,7 +25,7 @@ namespace WebApplicationCourseEng.Entities
 
         //public int GetAge()
         //{
-        //    return DateOfBirth.CalculateAge();
+         //   return DateOfBirth.CalculateAge();
         //}
     }
 }

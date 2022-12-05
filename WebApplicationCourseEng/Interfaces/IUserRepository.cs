@@ -3,6 +3,7 @@ using System.Collections.Generic;
 using System.Threading.Tasks;
 using WebApplicationCourseEng.DTOs;
 using WebApplicationCourseEng.Entities;
+using WebApplicationCourseEng.Helpers;
 
 namespace WebApplicationCourseEng.Interfaces
 {
@@ -14,7 +15,7 @@ namespace WebApplicationCourseEng.Interfaces
         Task<AppUser> GetUserByIdAsync(int id);
         Task<AppUser> GetUserByUsernameAsync(string username);
 
-        Task<IEnumerable<MemberDto>> GetMembersAsync();
+        Task<PagedList<MemberDto>> GetMembersAsync(UserParams userParams);
         Task<MemberDto> GetMemberAsync(string username);
     }
 }
