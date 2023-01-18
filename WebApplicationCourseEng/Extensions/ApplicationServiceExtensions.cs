@@ -25,6 +25,7 @@ namespace WebApplicationCourseEng.Extensions
                 options.UseSqlite(config.GetConnectionString("DefaultConnection"));
             });
             services.AddScoped<ILikesRepository, LikesRepository>();
+            services.AddScoped<IMessageRepository, MessageRepository>();
             return services;
         }
     }
